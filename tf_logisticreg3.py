@@ -12,8 +12,8 @@ class LogisticWithTF():
 
     def train_on_batch(self, x, y):  # batch 단위로 학습 할 메인 모델을 정의
         with tf.GradientTape() as tape:
-            logit = tf.matmul(x, self.w) + self.b
-            hypothesis = tf.sigmoid(logit)
+            logi = tf.matmul(x, self.w) + self.b
+            hypothesis = tf.sigmoid(logi)
             eps = 1e-10
             loss = -tf.reduce_mean(y * tf.math.log(hypothesis + eps) + (1 - y) *
                                    tf.math.log(1 - hypothesis + eps))
@@ -36,8 +36,8 @@ class LogisticWithTF():
         return loss_mem
 
     def predictModel(self, x):  # train_x를 가지고 학습된 model의 결과에 적용해서 label을 도출하는 메서드
-        logit = tf.matmul(x, self.w) + self.b
-        hypothesis = tf.sigmoid(logit)
+        logi = tf.matmul(x, self.w) + self.b
+        hypothesis = tf.sigmoid(logi)
         return hypothesis
 
     def evalModel(self, x, y):  # test_x, test_y를 가지고 학습된 model에 적용해서 res_y를 구하고 이를 test_y와 비교한 정확도 도출
